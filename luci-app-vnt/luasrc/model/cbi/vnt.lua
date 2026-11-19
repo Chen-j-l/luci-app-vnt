@@ -122,12 +122,12 @@ local model = nixio.fs.readfile("/proc/device-tree/model") or ""
 local hostname = nixio.fs.readfile("/proc/sys/kernel/hostname") or ""
 model = model:gsub("\n", "")
 hostname = hostname:gsub("\n", "")
-local device_name = (model ~= "" and model) or (hostname ~= "" and hostname) or "OpenWrt"
-device_name = device_name:gsub(" ", "_")
-desvice_name = s:taboption("privacy", Value, "desvice_name", translate("设备名称"),
+local host_name = (model ~= "" and model) or (hostname ~= "" and hostname) or "OpenWrt"
+host_name = host_name:gsub(" ", "_")
+host_name = s:taboption("privacy", Value, "device_name", translate("设备名称"),
 	translate("本机设备名称，方便区分不同设备"))
-desvice_name.placeholder = device_name
-desvice_name.default = device_name
+device_name.placeholder = host_name
+device_name.default = host_name
 
 tunname = s:taboption("privacy",Value, "tunname", translate("虚拟网卡名称"),
 	translate("自定义虚拟网卡的名称，在多开时虚拟网卡名称不能相同，默认为 vnt-tun"))
