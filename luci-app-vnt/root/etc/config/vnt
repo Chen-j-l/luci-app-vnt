@@ -1,5 +1,6 @@
 config vnt
 	option enabled '0'
+	option passmode 'off'
 	option mode 'static'
 	option ipaddr '10.26.0.6'
 	option desvice_id '10.26.0.6'
@@ -9,7 +10,4 @@ config vnt
 	option finger '0'
 	option relay '0'
 	option first_latency '0'
-	option multicast '0'
-	option tunmode 'tun'
-	option passmode 'off'
-    option vnt_input 'vnt'
+	

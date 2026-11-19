@@ -15,6 +15,10 @@ LUCI_PKGARCH:=all
 
 PKG_NAME:=luci-app-vnt
 
+define Package/$(PKG_NAME)/conffiles
+/etc/config/vnt
+endef
+
 include $(TOPDIR)/feeds/luci/luci.mk
 
 # call BuildPackage - OpenWrt buildroot signature
