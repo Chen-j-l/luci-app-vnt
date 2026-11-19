@@ -38,9 +38,3 @@ apk add --allow-untrusted luci-app-vnt.apk
     #服务端程序
     make package/vnt/vnts/compile V=s
  ```
-
-<p><img width="500" alt="" src="./Image/xml.png"></p>
-
-```
-sed -i 's/util/xml/g' /usr/lib/lua/luci/model/cbi/vnt.lua
-```
