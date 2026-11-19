@@ -13,9 +13,7 @@ function index()
 	entry({"admin", "vpn", "vnt", "status"}, call("act_status")).leaf = true
 	entry({"admin", "vpn", "vnt", "vnt_info"}, call("vnt_info")).leaf = true
 	entry({"admin", "vpn", "vnt", "vnt_all"}, call("vnt_all")).leaf = true
-	entry({"admin", "vpn", "vnt", "vnt_list"}, call("vnt_list")).leaf = true
 	entry({"admin", "vpn", "vnt", "vnt_route"}, call("vnt_route")).leaf = true
-	entry({"admin", "vpn", "vnt", "vnt_cmd"}, call("vnt_cmd")).leaf = true
 end
 
 function act_status()
@@ -61,7 +59,7 @@ function get_log()
 end
 
 function clear_log()
-	luci.sys.call("rm -rf /tmp/vnt*.log")
+	luci.sys.call("rm -rf /tmp/vnt.log")
 end
 
 function vnt_info()
@@ -139,45 +137,4 @@ function vnt_route()
 	html_route = html_table .. "</table>"
 	luci.http.prepare_content("application/json")
 	luci.http.write_json({ route = html_route })
-end
-
-function vnt_list()
-	os.execute("rm -rf /tmp/vnt-cli_list")
-	local list = luci.sys.exec("$(uci -q get vnt.@vnt-cli[0].clibin) --list 2>&1")
-	list = list:gsub("Virtual Ip", "虚拟IP")
-	local rows = {} 
-	for line in list:gmatch("[^\r\n]+") do
-		local cols = {} 
-		for col in line:gmatch("%S+") do
-			table.insert(cols, col)
-		end
-		table.insert(rows, cols) 
-	end
-
-	local html_table = "<table>"
-	for i, row in ipairs(rows) do
-		html_table = html_table .. "<tr>"
-		for j, col in ipairs(row) do
-			local colors = {"#FFA500", "#800000", "#0000FF", "#3CB371", "#00BFFF"} 
-			local color = colors[(j % 5) + 1] 
-			html_table = html_table .. "<td><font color='" .. color .. "'>" .. col .. "</font></td>"
-		end
-		html_table = html_table .. "</tr>"
-	end
-	html_table = html_table .. "</table>"
-	luci.http.prepare_content("application/json")
-	luci.http.write_json({ list = html_table })
-end
-
-function vnt_cmd()
-	os.execute("rm -rf /tmp/vnt*_cmd")
-	local html_cmd= luci.sys.exec("echo $(cat /proc/$(pidof vnt-cli)/cmdline | awk '{print $1}') 2>&1")
-	html_cmd = html_cmd:gsub("--no", "-不")
-	html_cmd = html_cmd:gsub("--dns", "dns服务")
-	html_cmd = html_cmd:gsub("--ip", "--地址")
-	html_cmd = html_cmd:gsub("--nic", "网卡名")
-	html_cmd = html_cmd:gsub("--use", "直连")
-	html_cmd = html_cmd:gsub("-channel", "方式")
-	luci.http.prepare_content("application/json")
-	luci.http.write_json({ cmd = html_cmd })
 end
