@@ -11,8 +11,7 @@ XHR.poll(3, '<%=url([[admin]], [[vpn]], [[vnt]], [[status]])%>', null,
 			var vntstaContent = data.running ? "已运行：" + "<span style='color:#DA70D6;'>" + data.vntSta + "</span>" : "";    
 			var vntcpuContent = data.running ? "<br>" + "CPU占用：" + "<span style='color:#6A5ACD;'>" + data.vntCpu + "</span>" : "";  
 			var vntramContent = data.running ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "&nbsp;&nbsp;&nbsp;&nbsp;内存占用：" + "<span style='color:#0000CD;'>" + data.vntRam + "</span>" : ""; 
-			var vnttagContent = data.running ? "<br>" + "当前版本：" + "<span style='color:#CD853F;'>" + data.vntTag + "</span>" : ""; 
-			st.innerHTML = "<em><b>vnt-cli " + vntStatus + vntstaContent + vntcpuContent + vntramContent + vnttagContent + "</b></em>";          
+			st.innerHTML = "<em><b>vnt-cli " + vntStatus + vntstaContent + vntcpuContent + vntramContent + "</b></em>";          
 		}
 	}
 );
