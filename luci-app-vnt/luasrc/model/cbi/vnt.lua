@@ -124,7 +124,7 @@ model = model:gsub("\n", "")
 hostname = hostname:gsub("\n", "")
 local host_name = (model ~= "" and model) or (hostname ~= "" and hostname) or "OpenWrt"
 host_name = host_name:gsub(" ", "_")
-host_name = s:taboption("privacy", Value, "device_name", translate("设备名称"),
+device_name = s:taboption("privacy", Value, "device_name", translate("设备名称"),
 	translate("本机设备名称，方便区分不同设备"))
 device_name.placeholder = host_name
 device_name.default = host_name
