@@ -63,8 +63,7 @@ function clear_log()
 end
 
 function vnt_info()
-	os.execute("rm -rf /tmp/vnt-cli_info")
-	local info = luci.sys.exec("$(uci -q get vnt.@vnt-cli[0].clibin) --info 2>&1")
+	local info = luci.sys.exec("/usr/bin/vnt-cli --info 2>&1")
 	info = info:gsub("Connection status", "连接状态")
 	info = info:gsub("Virtual ip", "虚拟IP")
 	info = info:gsub("Virtual gateway", "虚拟网关")
@@ -78,8 +77,7 @@ function vnt_info()
 end
 
 function vnt_all()
-	os.execute("rm -rf /tmp/vnt-cli_all")
-	local all = luci.sys.exec("$(uci -q get vnt.@vnt-cli[0].clibin) --all 2>&1")
+	local all = luci.sys.exec("/usr/bin/vnt-cli --all 2>&1")
 	all = all:gsub("Virtual Ip", "虚拟IP")
 	all = all:gsub("NAT Type", "NAT类型")
 	all = all:gsub("Public Ips", "外网IP")
@@ -111,8 +109,7 @@ function vnt_all()
 end
 
 function vnt_route()
-	os.execute("rm -rf /tmp/vnt-cli_route")
-	local route = luci.sys.exec("$(uci -q get vnt.@vnt-cli[0].clibin) --route 2>&1")
+	local route = luci.sys.exec("/usr/bin/vnt-cli --route 2>&1")
 	route = route:gsub("Next Hop", "下一跳地址")
 	route = route:gsub("Interface", "连接地址")
 	local rows = {} 
