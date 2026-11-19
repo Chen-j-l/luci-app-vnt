@@ -8,12 +8,9 @@ function index()
 	
  entry({"admin", "vpn", "vnt"}, alias("admin", "vpn", "vnt", "vnt"),_("VNT"), 44).dependent = true
 	entry({"admin", "vpn", "vnt", "vnt"}, cbi("vnt"),_("VNT"), 45).leaf = true
-	entry({"admin", "vpn",  "vnt",  "vnt_log"}, form("vnt_log"),_("客户端日志"), 46).leaf = true
+	entry({"admin", "vpn",  "vnt",  "vnt_log"}, form("vnt_log"),_("日志"), 46).leaf = true
 	entry({"admin", "vpn", "vnt", "get_log"}, call("get_log")).leaf = true
 	entry({"admin", "vpn", "vnt", "clear_log"}, call("clear_log")).leaf = true
-	entry({"admin", "vpn", "vnt", "vnt_log2"}, form("vnt_log2"),_("服务端日志"), 47).leaf = true
-	entry({"admin", "vpn", "vnt", "get_log2"}, call("get_log2")).leaf = true
-	entry({"admin", "vpn", "vnt", "clear_log2"}, call("clear_log2")).leaf = true
 	entry({"admin", "vpn", "vnt", "status"}, call("act_status")).leaf = true
 	entry({"admin", "vpn", "vnt", "vnt_info"}, call("vnt_info")).leaf = true
         entry({"admin", "vpn", "vnt", "vnt_all"}, call("vnt_all")).leaf = true
@@ -100,21 +97,6 @@ end
 
 function clear_log()
 	luci.sys.call("rm -rf /tmp/vnt-cli*.log")
-end
-
-function get_log2()
-	local log2 = ""
-    local files = {"/tmp/vnts.log"}
-    for i, file in ipairs(files) do
-        if luci.sys.call("[ -f '" .. file .. "' ]") == 0 then
-            log2 = log2 .. luci.sys.exec("cat " .. file)
-        end
-    end
-    luci.http.write(log2)
-end
-
-function clear_log2()
-	luci.sys.call("rm -rf /tmp/vnts*.log")
 end
 
 function vnt_info()
