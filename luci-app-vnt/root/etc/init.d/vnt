@@ -76,9 +76,9 @@ appenders:
 				limit: 1 mb
 			roller:
 				kind: fixed_window
-				pattern: /tmp/vnt-cli.{}.log
+				pattern: /tmp/vnt_{}.log
 				base: 1
-				count: 2
+				count: 0
 
 root:
 	level: info
@@ -87,9 +87,6 @@ root:
 EOF
 		 fi
 		[ ! -L /log4rs.yaml ] && rm -rf /log4rs.yaml && ln -sf /tmp/log4rs.yaml /log4rs.yaml
-		[ ! -L /tmp/vnt-cli.0.log ] && ln -sf /tmp/vnt.log /tmp/vnt-cli.0.log
-		[ ! -L /tmp/vnt-cli.1.log ] && ln -sf /tmp/vnt.log /tmp/vnt-cli.1.log
-		[ ! -L /tmp/vnt-cli.2.log ] && ln -sf /tmp/vnt.log /tmp/vnt-cli.2.log
 	else
 		rm -rf /tmp/log4rs.yaml
 	fi
