@@ -39,10 +39,6 @@ apk add --allow-untrusted luci-app-vnt.apk
     make package/vnt/vnts/compile V=s
  ```
 
-##
-
-> 如果 状态-系统日志里 出现下图日志内容可以使用以下命令解决
-
 <p><img width="500" alt="" src="./Image/xml.png"></p>
 
 ```
